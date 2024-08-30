@@ -33,13 +33,16 @@ htmlToColor = {
     "</code>" : color.END
 }
 
+#Converts markdown to where it's readabe in the command line
+#This converts markdown to html then html to command line colors or line spaces
 def customizeMarkdown(text):
-    html = markdown.markdown(text)
+    try:
+        html = markdown.markdown(text)
+    except Exception:
+        print("Error converting markdown")
+        return text
 
     for key in htmlToColor:
         html = html.replace(key, htmlToColor[key])
 
-    #Not really html anymore b/c the purpose is to remove all the tags
     return html
-      
-   
